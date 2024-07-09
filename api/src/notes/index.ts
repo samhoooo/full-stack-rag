@@ -41,7 +41,7 @@ async function generateNotes(
 ): Promise<Array<ArxivPaperNote>> {
   const documentsAsString = formatDocumentsAsString(documents);
   const model = new ChatOpenAI({
-    modelName: "gpt-4-1106-preview",
+    modelName: "gpt-4-turbo-2024-04-09",
     temperature: 0,
   });
   const modelWithTools = model.bind({
@@ -95,7 +95,8 @@ export async function takeNotes(
       ...doc.metadata,
       url: paperUrl,
     },
-  }));
+  })).filter(({pageContent}) => pageContent);
+  
   await Promise.all([
     database.addPaper({
       paper: formatDocumentsAsString(newDocs),

@@ -15,7 +15,7 @@ async function qaModel(
   notes: Array<ArxivPaperNote>
 ) {
   const model = new ChatOpenAI({
-    modelName: "gpt-4-1106-preview",
+    modelName: "gpt-4-turbo-2024-04-09",
     temperature: 0,
   });
   const modelWithTools = model.bind({
