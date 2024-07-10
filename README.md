@@ -1,7 +1,9 @@
-# Arxiv RAG
+# Financial report RAG
 
 ## Introduction
-Arxiv RAG is a web application and API designed for generating notes and answering questions on Arxiv papers using Large Language Models (LLMs). This project leverages the Unstructured API for parsing and chunking PDFs and Supabase for the PostgreSQL database and querying embeddings.
+A web application and API designed for generating notes and answering questions on financial reports using Large Language Models (LLMs). This project leverages the Unstructured API for parsing and chunking PDFs and Supabase for the PostgreSQL database and querying embeddings.
+
+This project is forked from https://github.com/bracesproul/arxiv-rag-youtube and inspired by the youtube video.
 
 ## Setup
 
