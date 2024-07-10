@@ -1,9 +1,4 @@
 import * as z from "zod";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -16,7 +11,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
-import { ChevronsUpDown } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { ArxivPaperNote } from "./api/take_notes";
@@ -118,15 +112,15 @@ export default function Home() {
                 name="paperUrl"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Paper URL</FormLabel>
+                    <FormLabel>Financial Report URL</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="https://arxiv.org/pdf/2305.15334.pdf"
+                        placeholder="https://digitalassets.tesla.com/tesla-contents/image/upload/IR/TSLA-Q1-2024-Update.pdf"
                         {...field}
                       />
                     </FormControl>
                     <FormDescription>
-                      The URL to the PDF paper you want to submit.
+                      The URL to the PDF financial report you want to submit.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -140,42 +134,15 @@ export default function Home() {
                     <FormLabel>Name</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Gorilla: Large Language Model Connected with Massive APIs"
+                        placeholder="Tesla: Q1 2024 update"
                         {...field}
                       />
                     </FormControl>
-                    <FormDescription>The name of the paper.</FormDescription>
+                    <FormDescription>The name of the financial report.</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              <Collapsible>
-                <CollapsibleTrigger asChild>
-                  <Button variant="ghost" size="sm">
-                    <p className="font-normal">Delete pages?</p>
-                    <ChevronsUpDown className="h-4 w-4" />
-                    <span className="sr-only">Toggle</span>
-                  </Button>
-                </CollapsibleTrigger>
-                <CollapsibleContent>
-                  <FormField
-                    control={submitPaperForm.control}
-                    name="pagesToDelete"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Pages to delete</FormLabel>
-                        <FormControl>
-                          <Input placeholder="10, 11, 12" {...field} />
-                        </FormControl>
-                        <FormDescription>
-                          The pages to delete from the paper.
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </CollapsibleContent>
-              </Collapsible>
               <Button type="submit">Submit</Button>
             </form>
           </Form>
@@ -197,7 +164,7 @@ export default function Home() {
                       <Input placeholder="Why is the sky blue" {...field} />
                     </FormControl>
                     <FormDescription>
-                      The question to ask about the paper.
+                      The question to ask about the report.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -211,7 +178,7 @@ export default function Home() {
       <div className="flex flex-row gap-5 mx-auto mt-3">
         {notes && notes.length > 0 && (
           <div className="flex flex-col gap-2 max-w-[600px]">
-            <h2>Notes</h2>
+            <h2>Summary</h2>
             <div className="flex flex-col gap-2">
               {notes.map((note, index) => (
                 <div className="flex flex-col gap-2 p-2" key={index}>
@@ -219,7 +186,7 @@ export default function Home() {
                     {index + 1}. {note.note}
                   </p>
                   <p className="text-sm text-gray-600">
-                    [{note.pageNumbers.join(", ")}]
+                    [{note.pageNumbers?.join(", ")}]
                   </p>
                 </div>
               ))}

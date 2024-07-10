@@ -20,11 +20,7 @@ function main() {
 
   app.post("/take_notes", async (req, res) => {
     const { paperUrl, name, pagesToDelete } = req.body;
-    // convert pagesToDelete back to array numbers
-    const pagesToDeleteArray = pagesToDelete
-      ? processPagesToDelete(pagesToDelete)
-      : undefined;
-    const notes = await takeNotes(paperUrl, name, pagesToDeleteArray);
+    const notes = await takeNotes(paperUrl, name);
     res.status(200).send(notes);
     return;
   });
