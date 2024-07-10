@@ -75,7 +75,6 @@ async function convertPdfToDocuments(pdf: Buffer): Promise<Array<Document>> {
 export async function takeNotes(
   paperUrl: string,
   name: string,
-  pagesToDelete?: number[]
 ): Promise<ArxivPaperNote[]> {
   const database = await SupabaseDatabase.fromExistingIndex();
   const existingPaper = await database.getPaper(paperUrl);
@@ -84,9 +83,6 @@ export async function takeNotes(
   }
 
   let pdfAsBuffer = await loadPdfFromUrl(paperUrl);
-  if (pagesToDelete && pagesToDelete.length > 0) {
-    pdfAsBuffer = await deletePagesFromPdf(pdfAsBuffer, pagesToDelete);
-  }
   const documents = await convertPdfToDocuments(pdfAsBuffer);
   const notes = await generateNotes(documents);
   const newDocs: Array<Document> = documents.map((doc) => ({
